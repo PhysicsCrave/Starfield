@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta
+      name="description"
+      content="Starfield — an interactive visualization of special relativity: aberration, Doppler shifting, time dilation and length contraction."
+    />
+    <title>Starfield — Relativistic Visualizer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="site.css" />
+    <!-- Warm the cache for the simulator while the visitor reads -->
+    <link rel="prefetch" href="starfield_v2.html" />
+  </head>
+  <body class="page">
+    <!-- Living sky: same renderer as the simulator, gently drifting at 0.05c -->
+    <canvas id="starfield" aria-hidden="true"></canvas>
+
+    <nav class="site-nav" aria-label="Main">
+      <a class="nav-brand wordmark" href="index.html">Starfield</a>
+      <div class="nav-links">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+
+    <main class="page-main landing-main">
+      <!-- Hero -->
+      <header class="landing-hero">
+      
+        <h1 class="landing-title wordmark">Starfield</h1>
+        <p class="landing-subtitle">Relativistic Visualizer and Simulator</p>
+        <p class="landing-lede">
+          Accelerate a spacecraft from everyday speeds to 0.99999c and observe
+          the consequences: starlight aberrates forward, colors Doppler-shift,
+          clocks and rulers diverge. 
+        </p>
+
+        <div class="cta-row">
+          <a id="beginSimulation" class="btn-primary" href="starfield_v2.html">
+            Begin Simulation
+          </a>
+          <a class="btn-ghost" href="about.html">About the project</a>
+        </div>
+
+      </header>
+
+     
+
+      <!-- What the simulator shows -->
+      <section class="feature-grid" aria-label="What you will see">
+        <article class="panel content-card feature-card">
+          <h2 class="panel-title">Aberration</h2>
+          <p>
+            Starlight crowds into the direction of travel. The sky
+            ahead tightens while the space behind you
+            empties out.
+          </p>
+        </article>
+
+        <article class="panel content-card feature-card">
+          <h2 class="panel-title">Doppler Shift</h2>
+          <p>
+            Stars you are racing toward shift blue. Whilst the ones falling behind
+            shift red. 
+          </p>
+        </article>
+
+        <article class="panel content-card feature-card">
+          <h2 class="panel-title">Clocks &amp; Rulers</h2>
+          <p>
+            Compare Earth's clock against your own, Earth's measured distance against the length-contracted one.
+          
+          </p>
+        </article>
+      </section>
+
+      <footer class="page-footer">
+        © 2026 Quang Anh Nguyen · Starfield — a physics outreach project
+      </footer>
+    </main>
+
+    <!-- Cinematic fade-to-black used when entering the simulator -->
+    <div class="veil" aria-hidden="true"></div>
+
+    <script type="module" src="site.js"></script>
+  </body>
+</html>

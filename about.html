@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="description" content="About Starfield — a physics outreach project." />
+    <title>About — Starfield</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="site.css" />
+  </head>
+  <body class="page">
+    <canvas id="starfield" aria-hidden="true"></canvas>
+
+    <nav class="site-nav" aria-label="Main">
+      <a class="nav-brand wordmark" href="index.html">Starfield</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html" aria-current="page">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+
+    <main class="page-main">
+      <!-- Hero -->
+      <header class="page-hero">
+        <h1 class="wordmark">About the Project</h1>
+        <p class="lede">
+          Starfield is for anyone who has heard that time
+          slows down near the speed of light and wished they could watch it happen. It
+          turns the equations of special relativity into the view from the window of a
+          starship — one you steer yourself.
+        </p>
+      </header>
+
+      <!-- Project Overview -->
+      <section class="panel content-card" aria-labelledby="overviewTitle">
+        <h2 class="panel-title" id="overviewTitle">Project Overview</h2>
+        <p>
+          Starfield is an interactive visualizer and simulator for exploring the effects of special relativity built around real Lorentz mathematics, relativistic aberration, and Doppler shifting. 
+        </p>
+        <p>
+          To use the simulator, pick a cruising speed and
+          choose where you are headed. A logarithmic velocity slider and presets let you
+          travel from a leisurely 0.1c to the extreme 0.99999c, where the strangest effects
+          live. Destinations range from Proxima Centauri, 4.2 light-years away, to
+          Sagittarius A* and the Andromeda Galaxy 2.5 million light-years out. Live
+          readouts compare the journey two ways: the time it takes on an Earth clock
+          against the far shorter time you experience aboard the ship, and Earth's measured
+          distance against the length-contracted one rushing past your window. The Lorentz
+          factor γ ties them together — at high speeds, a trip that takes centuries from
+          Earth passes in a handful of years for the traveler.
+        </p>
+      </section>
+
+      <!-- About Me -->
+      <section class="panel content-card" aria-labelledby="aboutMeTitle">
+        <h2 class="panel-title" id="aboutMeTitle">About Me</h2>
+        <div class="media-grid">
+         
+          <div class="photo-placeholder" role="img" aria-label="Placeholder for a professional portrait">
+            <img src="DSCF9782.jpg" alt="Portrait of Your Name"
+                    style="width:100%; border-radius: var(--radius-lg);" /> 
+          </div>
+          <div>
+            <p>
+              Hi my name is Quang Anh Nguyen, the creator of Starfield and a high school student based in Southern California. I have been a physics enthusiast since a young age, and my passion for understanding the universe and desire to share that knowledge with others has led me to create Starfield.
+            </p>
+            <p>
+              I hope that Starfield will inspire others to explore the wonders of physics and appreciate the beauty of our universe.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mission -->
+      <section class="panel content-card" aria-labelledby="missionTitle">
+        <h2 class="panel-title" id="missionTitle">Mission</h2>
+        <p>
+          Everybody has heard of Albert Eistein and Special Relativity, but few understand its strange and fascinating predictions. The goal of Starfield is to make these predictions tangible and accessible to everyone regardless of their background in physics. You will be able to experience the effects of travelling at relativistic speeds in a way that is both educational and engaging by experiencing the cosmos through the viewpoint of an interstellar spaceship moving at relativistic speeds.
+        </p>
+      </section>
+
+      <!-- Timeline / Goals -->
+      <section class="panel content-card" aria-labelledby="timelineTitle">
+        <h2 class="panel-title" id="timelineTitle">Roadmap</h2>
+        <ul class="timeline">
+          <li>
+            <span class="when">Milestone 01</span>
+            <p class="what"> First
+            prototype of the special relativity simulator engine. </p>
+          </li>
+          <li>
+            <span class="when">Milestone 02</span>
+            <p class="what"> First prototype of starfield, relativistic aberration, and Doppler shifting visualizer.</p>
+          </li>
+          <li>
+            <span class="when">Milestone 03</span>
+            <p class="what">Public
+            launch as an educational site to the web.</p>
+          </li>
+          <li>
+            <span class="when">Next</span>
+            <p class="what">Smoother visual effects, improved user interface, and a physics background page.</p>
+          </li>
+        </ul>
+      </section>
+
+      <footer class="page-footer">
+        © 2026Quang Anh Nguyen · Starfield— a physics outreach project
+      </footer>
+    </main>
+
+    <script type="module" src="site.js"></script>
+  </body>
+</html>

@@ -1,0 +1,392 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   starfield_v2.css — simulator-page components
+   ---------------------------------------------------------------------------
+   Loaded AFTER site.css (design tokens, base styles and the glass .panel
+   primitives live there). This file only styles what the simulator adds:
+   the HUD columns, velocity slider, presets, destination select, readouts,
+   and the top-left header with its scientific disclaimer.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+
+/* ── App header (top-left): brand + disclaimer ─────────────────────────────── */
+.app-header {
+  position: fixed;
+  top: var(--hud-inset);
+  left: var(--hud-inset);
+  z-index: 10;
+  max-width: min(340px, 40vw);
+  user-select: none;
+  animation: hud-enter 600ms var(--ease-out) both;
+}
+
+.app-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.app-title a { text-decoration: none; }
+
+.app-subtitle {
+  margin: 4px 0 0;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+}
+
+/* Discreet route back to the landing page */
+.app-home {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  transition: color var(--t-fast) var(--ease-out);
+}
+.app-home:hover {
+  color: var(--accent-strong);
+}
+
+/* Scientific disclaimer: small, semi-transparent, deliberately quiet */
+.sim-note {
+  margin: 14px 0 0;
+  padding-left: 10px;
+  border-left: 2px solid var(--border-strong);
+  font-size: 0.66rem;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+  opacity: 0.75;
+}
+
+
+/* ── HUD layout ────────────────────────────────────────────────────────────── */
+.hud {
+  position: fixed;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: var(--hud-gap);
+}
+
+.hud-left {
+  left: var(--hud-inset);
+  bottom: var(--hud-inset);
+  width: min(340px, calc(100vw - 2 * var(--hud-inset)));
+}
+
+.hud-right {
+  right: var(--hud-inset);
+  bottom: var(--hud-inset);
+  width: min(360px, calc(100vw - 2 * var(--hud-inset)));
+  max-height: calc(100vh - 2 * var(--hud-inset));
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+/* Staggered entrance for the right-hand stack */
+.hud-right .panel:nth-child(1) { animation-delay: 60ms; }
+.hud-right .panel:nth-child(2) { animation-delay: 120ms; }
+.hud-right .panel:nth-child(3) { animation-delay: 180ms; }
+.hud-right .panel:nth-child(4) { animation-delay: 240ms; }
+
+.traveler-accent {
+  border-color: var(--border-accent);
+  background: linear-gradient(var(--accent-soft), transparent 60%),
+              var(--panel-glass);
+}
+.traveler-accent .panel-title { color: var(--accent); border-bottom-color: var(--border-accent); }
+.traveler-accent .stat-value  { color: var(--accent-strong); }
+
+
+/* ── Velocity slider ───────────────────────────────────────────────────────── */
+/* Fully custom track/thumb. The filled portion is driven by the JS-set
+   --fill custom property so the track doubles as a progress readout. */
+.speed-slider {
+  --fill: 0%;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 20px;              /* generous hit target */
+  margin: 2px 0 10px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.speed-slider::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  /* Written out (not var(--accent-gradient)): a gradient var can't be nested
+     inside another linear-gradient(), and layered backgrounds need the
+     image + sizing in one declaration. */
+  background:
+    linear-gradient(90deg, #0ea5e9, #2fd8f7) 0 0 / var(--fill) 100% no-repeat,
+    rgba(255, 255, 255, 0.10);
+}
+
+.speed-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  margin-top: -6px;          /* (18 − 6) / 2, centers thumb on 6px track */
+  border-radius: 50%;
+  background: #fff;
+  border: none;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08),
+              0 2px 8px rgba(0, 0, 0, 0.6);
+  transition: box-shadow var(--t-fast) var(--ease-out),
+              transform var(--t-fast) var(--ease-out);
+}
+.speed-slider:hover::-webkit-slider-thumb  { transform: scale(1.12); }
+.speed-slider:active::-webkit-slider-thumb {
+  transform: scale(1.02);
+  box-shadow: 0 0 0 7px var(--accent-glow), 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.speed-slider::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.10);
+}
+.speed-slider::-moz-range-progress {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--accent-gradient);
+}
+.speed-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08),
+              0 2px 8px rgba(0, 0, 0, 0.6);
+  transition: box-shadow var(--t-fast) var(--ease-out),
+              transform var(--t-fast) var(--ease-out);
+}
+.speed-slider:hover::-moz-range-thumb  { transform: scale(1.12); }
+.speed-slider:active::-moz-range-thumb {
+  box-shadow: 0 0 0 7px var(--accent-glow), 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.speed-slider:focus-visible { outline-offset: 6px; }
+
+
+/* ── Speed readout ─────────────────────────────────────────────────────────── */
+.speed-label {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.98rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+}
+
+.speed-aux {
+  color: var(--text-secondary);
+  font-size: 0.76rem;
+  font-weight: 400;
+}
+
+
+/* ── Speed presets ─────────────────────────────────────────────────────────── */
+.speed-presets {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.preset-group-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.preset-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.preset-btn {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: color var(--t-fast) var(--ease-out),
+              border-color var(--t-fast) var(--ease-out),
+              background var(--t-fast) var(--ease-out),
+              box-shadow var(--t-fast) var(--ease-out),
+              transform var(--t-fast) var(--ease-out);
+}
+
+.preset-btn:hover {
+  color: var(--text-primary);
+  background: var(--card-hover);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+
+.preset-btn:active { transform: translateY(0); }
+
+.preset-btn.is-active {
+  color: var(--accent-strong);
+  border-color: var(--border-accent);
+  background: var(--accent-soft);
+  box-shadow: 0 0 0 3px rgba(47, 216, 247, 0.10);
+}
+
+
+/* ── Destination selector ──────────────────────────────────────────────────── */
+.destination-select {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: var(--font-ui);
+  font-size: 0.86rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--text-primary);
+  background:
+    /* custom chevron */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%2393a8b8' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    no-repeat right 14px center,
+    var(--card);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: 11px 38px 11px 14px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--t-fast) var(--ease-out),
+              box-shadow var(--t-fast) var(--ease-out),
+              background-color var(--t-fast) var(--ease-out);
+}
+
+.destination-select:hover  { border-color: var(--border-accent); }
+.destination-select:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+  outline: none;
+}
+
+.destination-select option {
+  background: #0d1420;
+  color: var(--text-primary);
+}
+
+.destination-meta {
+  margin-top: 12px;
+  font-size: 0.74rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+
+/* ── Stats (Earth / Traveler panels) ───────────────────────────────────────── */
+.stat { margin-bottom: 14px; }
+.stat:last-child { margin-bottom: 0; }
+
+.stat-label {
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--text-primary);
+}
+
+
+/* ── Metrics grid ──────────────────────────────────────────────────────────── */
+.metric-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.metric {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 9px;
+  border-bottom: 1px dashed var(--border);
+}
+.metric:last-child { border-bottom: none; padding-bottom: 0; }
+
+.metric-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.metric-value {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--accent-strong);
+  letter-spacing: 0.01em;
+}
+
+
+/* ── Responsive ────────────────────────────────────────────────────────────── */
+/* Below ~720px the two HUD columns can no longer share the width: pin the
+   readouts to the top (scrollable) and keep the velocity control thumb-
+   reachable at the bottom. The header (and with it the disclaimer) yields
+   its space to the readouts on phones. */
+@media (max-width: 720px) {
+  :root { --hud-inset: 14px; }
+
+  .app-header { display: none; }
+
+  .hud-right {
+    top: var(--hud-inset);
+    bottom: auto;
+    left: var(--hud-inset);
+    right: var(--hud-inset);
+    width: auto;
+    max-height: 46vh;
+  }
+
+  .hud-left {
+    left: var(--hud-inset);
+    right: var(--hud-inset);
+    bottom: var(--hud-inset);
+    width: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-header { animation: none; }
+  .preset-btn,
+  .preset-btn:hover { transform: none; transition: none; }
+  .speed-slider::-webkit-slider-thumb { transition: none; }
+  .speed-slider::-moz-range-thumb { transition: none; }
+}

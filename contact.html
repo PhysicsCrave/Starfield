@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="description" content="Contact — Starfield." />
+    <title>Contact — Starfield</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="site.css" />
+  </head>
+  <body class="page">
+    <canvas id="starfield" aria-hidden="true"></canvas>
+
+    <nav class="site-nav" aria-label="Main">
+      <a class="nav-brand wordmark" href="index.html">Starfield</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" aria-current="page">Contact</a>
+      </div>
+    </nav>
+
+    <main class="page-main">
+      <!-- Hero -->
+      <header class="page-hero">
+        <h1 class="wordmark">Get in touch</h1>
+        <p class="lede">
+          I welcome inquiries related to this project, feedback, physics research, or potential collaboration. Please feel free to reach out — I aim to respond promptly.
+        </p>
+      </header>
+
+      <!-- Photo + contact details -->
+      <section class="panel content-card" aria-labelledby="contactTitle">
+        <h2 class="panel-title" id="contactTitle">Contact</h2>
+        <div class="media-grid">
+          
+               
+          <div class="photo-placeholder" role="img" aria-label="Placeholder for a professional portrait">
+            <img src="DSCF9782.jpg" alt="Portrait of Your Name"
+                    style="width:100%; border-radius: var(--radius-lg);" /> 
+          </div>
+
+          <div>
+            <dl class="contact-list">
+              <div>
+                <dt>Email</dt>
+                <dd><a href="mailto:quanganh300809@gmail.com">quanganh300809@gmail.com</a></dd>
+              </div>
+              <div>
+                <dt>GitHub</dt>
+                <dd><a href="https://github.com/your-username" rel="noopener">github.com/your-username</a></dd>
+              </div>
+              <div>
+                <dt>LinkedIn</dt>
+                <dd><a href="https://www.linkedin.com/in/your-profile" rel="noopener">linkedin.com/in/your-profile</a></dd>
+              </div>
+            </dl>
+
+            <!-- Optional extra social links — edit or remove freely -->
+            <div class="social-row" aria-label="Social links">
+              <a href="#" rel="noopener">[ X / Twitter ]</a>
+              <a href="#" rel="noopener">[ Instagram ]</a>
+              <a href="#" rel="noopener">[ YouTube ]</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="page-footer">
+        © 2026 Quang Anh Nguyen · Starfield — a physics outreach project
+      </footer>
+    </main>
+
+    <script type="module" src="site.js"></script>
+  </body>
+</html>

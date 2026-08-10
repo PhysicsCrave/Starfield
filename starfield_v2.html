@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>Starfield — Relativity Explorer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- site.css = design tokens + glass primitives; starfield_v2.css = simulator components -->
+    <link rel="stylesheet" href="site.css" />
+    <link rel="stylesheet" href="starfield_v2.css" />
+  </head>
+  <body>
+    <!-- Full-viewport starfield render target. Purely decorative for
+         assistive tech — all information lives in the panels. -->
+    <canvas id="starfield" aria-hidden="true"></canvas>
+
+    <header class="app-header">
+      <h1 class="app-title">
+        <a class="wordmark" href="index.html" title="Back to Relativity Explorer">Starfield</a>
+      </h1>
+      <p class="app-subtitle">Relativistic interstellar travel</p>
+      <a class="app-home" href="index.html">← Back to home</a>
+      <p class="sim-note">
+        Aberration and Doppler effects are stylized for educational clarity and engagement purpose —
+        an illustration of the physics, not an exact photometric rendering.
+      </p>
+    </header>
+
+    <!-- Left HUD: velocity control -->
+    <aside class="hud hud-left">
+      <section class="panel speed-control" aria-labelledby="velocityTitle">
+        <h2 class="panel-title" id="velocityTitle">Velocity</h2>
+        <input
+          id="speedSlider"
+          class="speed-slider"
+          type="range"
+          min="0"
+          max="1"
+          step="0.00001"
+          value="0"
+          aria-label="Ship velocity as a fraction of the speed of light (logarithmic scale)"
+        />
+        <div id="speedLabel" class="speed-label" aria-live="polite"></div>
+        <div id="speedPresets" class="speed-presets"></div>
+      </section>
+    </aside>
+
+    <!-- Right HUD: destination + observer readouts -->
+    <aside class="hud hud-right">
+      <section class="panel destination-panel" aria-labelledby="destinationTitle">
+        <h2 class="panel-title" id="destinationTitle">🎯 Destination</h2>
+        <select id="destinationSelect" class="destination-select" aria-label="Destination"></select>
+        <div class="destination-meta" id="destinationMeta">—</div>
+      </section>
+
+      <section class="panel" aria-labelledby="earthTitle">
+        <h2 class="panel-title" id="earthTitle">🌍 Earth Observer</h2>
+        <div class="stat">
+          <div class="stat-label">Distance to destination</div>
+          <div class="stat-value" id="out-earthDistance">—</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Travel time (Earth clock)</div>
+          <div class="stat-value" id="out-earthTime">—</div>
+        </div>
+      </section>
+
+      <section class="panel traveler-accent" aria-labelledby="travelerTitle">
+        <h2 class="panel-title" id="travelerTitle">🚀 Traveler</h2>
+        <div class="stat">
+          <div class="stat-label">Length-contracted distance</div>
+          <div class="stat-value" id="out-travelerDistance">—</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Experienced travel time</div>
+          <div class="stat-value" id="out-travelerTime">—</div>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="metricsTitle">
+        <h2 class="panel-title" id="metricsTitle">Relativity Metrics</h2>
+        <div class="metric-grid">
+          <div class="metric">
+            <span class="metric-label">Velocity</span>
+            <span class="metric-value" id="out-velocity">—</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Lorentz factor γ</span>
+            <span class="metric-value" id="out-gamma">—</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Time dilation</span>
+            <span class="metric-value" id="out-timeDilation">—</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Length contraction</span>
+            <span class="metric-value" id="out-lengthFactor">—</span>
+          </div>
+        </div>
+      </section>
+    </aside>
+
+    <!-- Clears from black on arrival — the other half of the landing page's
+         cinematic hand-off (harmless on direct loads too). -->
+    <div class="veil veil--enter" aria-hidden="true"></div>
+
+    <script type="module" src="starfield_v2.js"></script>
+  </body>
+</html>
